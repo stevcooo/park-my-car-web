@@ -121,7 +121,6 @@ function App() {
   ];
 
   const smsLink = () => {
-    console.log('smsLink', selectedParking?.durations);
     if (selectedParkingZone === null || selectedCar === null || selectedParking === null) {
       return '';
     }
@@ -130,6 +129,19 @@ function App() {
     const text = `${selectedParkingZone.code} ${selectedCar.plate} ${selectedDurationHours?.code}`;
     const sms = `sms:${selectedParking.number}${divider}body${afterBodySign}${text.trim()}`;
     return sms;
+  };
+
+  const canSendSms = () => {
+    if (selectedCar === null || selectedParking === null || selectedParkingZone === null) {
+      console.log('false');
+      return false;
+    }
+    if (selectedParking.id === POCId) {
+      console.log(selectedDurationHours !== null ? 'true' : 'false');
+      return selectedDurationHours !== null;
+    }
+    console.log('true');
+    return true;
   };
 
   useEffect(() => {
@@ -189,9 +201,9 @@ function App() {
             {(selectedCar !== null && selectedParking === null)
                           && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}
             {(selectedParking !== null && selectedParkingZone === null)
-                          && <SelectParkingZone itemsToShow={selectedParking.zones} setItem={setSelectedParkingZone} goBack={removeSelectedParking} />}
+                          && <SelectParkingZone itemsToShow={selectedParking.zones} setItem={setSelectedParkingZone} goBack={removeSelectedParking} smsLink={smsLink} canSendSms={() => canSendSms} />}
             {(selectedParkingZone !== null && selectedParking.id === POCId)
-                          && <SelectDuration itemsToShow={selectedParking.durations} setItem={setSelectedDurationHours} goBack={removeSelectedParkingZone} />}
+                          && <SelectDuration itemsToShow={selectedParking.durations} setItem={setSelectedDurationHours} goBack={removeSelectedParkingZone} smsLink={smsLink} />}
           </div>
         </form>
       </div>

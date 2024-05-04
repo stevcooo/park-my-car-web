@@ -42,10 +42,6 @@ export default function SelectCar({ setItem }) {
           ))}
         </div>
       </div>
-      <div className="next-prev">
-        <button type="button" className="prev">Previous Step</button>
-        <button type="button" id="step2btn" className="next">Next Step</button>
-      </div>
     </section>
   );
 }

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 export default function SelectParking({ items, setItem, goBack }) {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [, setSelectedItem] = useState(null);
 
   const chooseThis = (item) => {
     setSelectedItem(item);
@@ -15,8 +15,6 @@ export default function SelectParking({ items, setItem, goBack }) {
       <div className="lightSpeedIn form" id="step2">
         <div className="main-heading">
           Изберете паркинг
-          {' '}
-          { selectedItem?.name}
         </div>
         <div className="check-field row">
           {items.map((item) => (
@@ -32,7 +30,6 @@ export default function SelectParking({ items, setItem, goBack }) {
       </div>
       <div className="next-prev">
         <button type="button" className="prev" onClick={goBack}>Previous Step</button>
-        <button type="button" id="step2btn" className="next">Next Step</button>
       </div>
     </section>
   );

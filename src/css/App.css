@@ -374,7 +374,7 @@ form
 {
     width: 100% !important;
 }
-.next-prev button
+.next-prev button, .next-prev a
 {
     height: 100%;
     width: 50%;
