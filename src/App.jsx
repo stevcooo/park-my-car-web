@@ -23,6 +23,9 @@ function App() {
           <form id="steps" method="post" encType="multipart/form-data">
             <div className="show-section wrapper">
               {selectedCar?.name}
+              {' '}
+              <br />
+              {selectedParking?.name}
               {/* <AddVehicle /> */}
               {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
               {(selectedCar !== null && selectedParking === null) && <SelectParking setItem={setSelectedParking} goBack={removeSelectedCar} /> }
