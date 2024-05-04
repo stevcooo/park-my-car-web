@@ -33,7 +33,7 @@ export default function SelectParking({ setItem, goBack }) {
             <div className="tab-33 col-md-3" key={parking.id}>
               <div className="check-field-single">
                 <img src="assets/images/insurance_types/hand.png" alt="" />
-                <input defaultChecked type="radio" name="insurance" value={parking.name} onClick={() => chooseThis(parking)} />
+                <input type="radio" name="insurance" value={parking.name} onClick={() => chooseThis(parking)} />
               </div>
               <span className="insurance-type">{parking.name}</span>
             </div>

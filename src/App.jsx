@@ -16,24 +16,29 @@ function App() {
     setSelectedCar(null);
   };
 
+  const reset = () => {
+    console.log('reset');
+    setSelectedCar(null);
+    setSelectedParking(null);
+  };
+
   return (
-    <main className="overflow-hidden">
-      <div className="row">
-        <div className="tab-sm-100 col-md-12 steps-area">
-          <form id="steps" method="post" encType="multipart/form-data">
-            <div className="show-section wrapper">
-              {selectedCar?.name}
-              {' '}
-              <br />
-              {selectedParking?.name}
-              {/* <AddVehicle /> */}
-              {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
-              {(selectedCar !== null && selectedParking === null) && <SelectParking setItem={setSelectedParking} goBack={removeSelectedCar} /> }
-            </div>
-          </form>
-        </div>
+    <div className="row">
+      <div className="tab-sm-100 col-md-12 steps-area">
+        <form id="steps" method="post" encType="multipart/form-data">
+          <div className="show-section wrapper">
+            <button type="button" className="prev" onClick={() => reset()}>Ресет</button>
+            {selectedCar?.name}
+            {' '}
+            <br />
+            {selectedParking?.name}
+            {/* <AddVehicle /> */}
+            {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
+            {(selectedCar !== null && selectedParking === null) && <SelectParking setItem={setSelectedParking} goBack={removeSelectedCar} />}
+          </div>
+        </form>
       </div>
-    </main>
+    </div>
   );
 }
 
