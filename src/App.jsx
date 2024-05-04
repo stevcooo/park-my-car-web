@@ -9,21 +9,29 @@ import AddVehicle from './components/AddVehicle';
 import SelectCar from './components/SelectCar';
 import SelectParking from './components/SelectParking';
 import SelectParkingZone from './components/SelectParkingZone';
+import SelectDuration from './components/SelectDuration';
 
 function App() {
   const [selectedCar, setSelectedCar] = useState(null);
   const [selectedParking, setSelectedParking] = useState(null);
   const [selectedParkingZone, setSelectedParkingZone] = useState(null);
+  const [selectedDurationHours, setSelectedDurationHours] = useState(null);
+  const [isAndroid, setIsAndroid] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
   const removeSelectedCar = () => {
     setSelectedCar(null);
   };
   const removeSelectedParking = () => {
     setSelectedParking(null);
   };
+  const removeSelectedParkingZone = () => {
+    setSelectedParkingZone(null);
+  };
 
   const reset = () => {
     setSelectedCar(null);
     setSelectedParking(null);
+    setSelectedParkingZone(null);
     setSelectedParkingZone(null);
   };
 
@@ -44,6 +52,12 @@ function App() {
         { name: 'Зона 2', code: '2' },
       ],
       recentZones: [],
+      durations: [
+        { name: '1 час', code: '1' },
+        { name: '2 часа', code: '2' },
+        { name: '3 часа', code: '3' },
+        { name: '4 часа', code: '4' },
+      ],
     },
     {
       id: GradskiParkingId,
@@ -101,12 +115,22 @@ function App() {
         },
 
       ],
-      // recentZones,
+      recentZones: [],
+      durations: [],
     },
   ];
 
-  const [isAndroid, setIsAndroid] = useState(false);
-  const [isIOS, setIsIOS] = useState(false);
+  const smsLink = () => {
+    console.log('smsLink', selectedParking?.durations);
+    if (selectedParkingZone === null || selectedCar === null || selectedParking === null) {
+      return '';
+    }
+    const divider = isIOS ? '&' : '?';
+    const afterBodySign = isIOS ? '=' : ':';
+    const text = `${selectedParkingZone.code} ${selectedCar.plate} ${selectedDurationHours?.code}`;
+    const sms = `sms:${selectedParking.number}${divider}body${afterBodySign}${text.trim()}`;
+    return sms;
+  };
 
   useEffect(() => {
     const { userAgent } = window.navigator;
@@ -138,6 +162,8 @@ function App() {
             <br />
             {selectedParking?.name}
             {' '}
+            {selectedParking?.number}
+            {' '}
             <br />
             {selectedParkingZone?.code}
             <br />
@@ -156,10 +182,16 @@ function App() {
               isAndroid:
               { isAndroid ? 'true' : 'false'}
             </div>
+            <br />
+            <a href={smsLink()} className="next">SMS</a>
             {/* <AddVehicle /> */}
             {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
-            {(selectedCar !== null && selectedParking === null) && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}
-            {(selectedParking !== null && selectedParkingZone === null) && <SelectParkingZone itemsToShow={selectedParking.zones} setItem={setSelectedParkingZone} goBack={removeSelectedParking} />}
+            {(selectedCar !== null && selectedParking === null)
+                          && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}
+            {(selectedParking !== null && selectedParkingZone === null)
+                          && <SelectParkingZone itemsToShow={selectedParking.zones} setItem={setSelectedParkingZone} goBack={removeSelectedParking} />}
+            {(selectedParkingZone !== null && selectedParking.id === POCId)
+                          && <SelectDuration itemsToShow={selectedParking.durations} setItem={setSelectedDurationHours} goBack={removeSelectedParkingZone} />}
           </div>
         </form>
       </div>
