@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 
-export default function SelectParking({ setItem }) {
+export default function SelectParking({ setItem, goBack }) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const chooseThis = (item) => {
@@ -41,7 +41,7 @@ export default function SelectParking({ setItem }) {
         </div>
       </div>
       <div className="next-prev">
-        <button type="button" className="prev">Previous Step</button>
+        <button type="button" className="prev" onClick={goBack}>Previous Step</button>
         <button type="button" id="step2btn" className="next">Next Step</button>
       </div>
     </section>

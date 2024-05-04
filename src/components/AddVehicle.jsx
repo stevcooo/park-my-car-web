@@ -3,7 +3,7 @@
 export default function AddVehicle() {
   return (
     <section className="steps">
-      <div className="lightSpeedIn form" id="step1">
+      <div className="lightSpeedIn form">
         <div className="main-heading">
           Додади возило
         </div>
@@ -12,7 +12,7 @@ export default function AddVehicle() {
             <label>Возило</label>
           </div>
           <div className="col-md-9">
-            <input type="text" name="name" id="vehicleName" />
+            <input type="text" name="name" />
           </div>
         </div>
         <div className="input-field row">
@@ -20,13 +20,13 @@ export default function AddVehicle() {
             <label>Регистрација</label>
           </div>
           <div className="col-md-9">
-            <input type="text" name="mail" id="vehiclePlate" />
+            <input type="text" name="mail" />
           </div>
         </div>
       </div>
       <div className="next-prev">
-        <button type="button" id="vehicleCancel" className="prev">Откажи</button>
-        <button type="button" id="vehicleAdd" className="next">Додади</button>
+        <button type="button" className="prev">Откажи</button>
+        <button type="button" className="next">Додади</button>
       </div>
     </section>
   );

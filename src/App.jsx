@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import './css/App.css';
 import './css/animation.css';
@@ -10,6 +12,10 @@ import SelectParking from './components/SelectParking';
 function App() {
   const [selectedCar, setSelectedCar] = useState(null);
   const [selectedParking, setSelectedParking] = useState(null);
+  const removeSelectedCar = () => {
+    setSelectedCar(null);
+  };
+
   return (
     <main className="overflow-hidden">
       <div className="row">
@@ -17,9 +23,9 @@ function App() {
           <form id="steps" method="post" encType="multipart/form-data">
             <div className="show-section wrapper">
               {selectedCar?.name}
-              <AddVehicle />
+              {/* <AddVehicle /> */}
               {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
-              {selectedParking === null && <SelectParking setItem={setSelectedParking} /> }
+              {(selectedCar !== null && selectedParking === null) && <SelectParking setItem={setSelectedParking} goBack={removeSelectedCar} /> }
             </div>
           </form>
         </div>
