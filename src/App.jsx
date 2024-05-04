@@ -118,6 +118,14 @@ function App() {
             {' '}
             <br />
             {selectedParkingZone?.code}
+            <br />
+            SMS:
+            {' '}
+            {selectedParkingZone?.code}
+            {' '}
+            {selectedCar?.plate}
+            {' =>'}
+            {selectedParking?.number}
             {/* <AddVehicle /> */}
             {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
             {(selectedCar !== null && selectedParking === null) && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}

@@ -13,18 +13,13 @@ export default function SelectCar({ setItem }) {
   const vehicles = [
     {
       id: 1,
-      name: 'Toyota Corolla',
-      plate: 'SK 1234 AB',
+      name: 'Мазда',
+      plate: 'SK9819BM',
     },
     {
       id: 2,
-      name: 'Ford Focus',
-      plate: 'SK 5678 CD',
-    },
-    {
-      id: 3,
-      name: 'VW Golf',
-      plate: 'SK 9012 EF',
+      name: 'Tojota',
+      plate: 'SK187VF',
     },
   ];
   return (
