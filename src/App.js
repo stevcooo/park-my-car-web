@@ -1,7 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
-import './animation.css';
-import './responsive.css';
+import './css/App.css';
+import './css/animation.css';
+import './css/responsive.css';
+import AddVehicle from './components/AddVehicle';
 
 function App() {
   return (
@@ -10,33 +10,7 @@ function App() {
             <div className="tab-sm-100 col-md-12 steps-area">
                 <form id="steps" method="post" enctype="multipart/form-data">
                     <div className="show-section wrapper">
-                        <section className="steps">
-                            <div className="lightSpeedIn form" id="step1">
-                                <div className="main-heading">
-                                    Додади возило
-                                </div>
-                                <div className="input-field row">
-                                    <div className="col-md-3 text-end">
-                                        <label>Возило</label>
-                                    </div>
-                                    <div className="col-md-9">
-                                        <input type="text" name="name" id="vehicleName"/>
-                                    </div>
-                                </div>
-                                <div className="input-field row">
-                                    <div className="col-md-3 text-end">
-                                        <label>Регистрација</label>
-                                    </div>
-                                    <div className="col-md-9">
-                                        <input type="text" name="mail" id="vehiclePlate"/>
-                                    </div>
-                                </div>
-                            </div>
-                             <div className="next-prev">
-                                <button type="button" id="vehicleCancel" className="prev">Откажи</button>
-                                <button type="button" id="vehicleAdd" className="next">Додади</button>
-                            </div>
-                        </section>
+                        <AddVehicle />
                          <section className="steps">
                             <div className="lightSpeedIn form" id="step2">
                                 <div className="main-heading">
