@@ -4,7 +4,7 @@
 import './css/App.css';
 import './css/animation.css';
 import './css/responsive.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddVehicle from './components/AddVehicle';
 import SelectCar from './components/SelectCar';
 import SelectParking from './components/SelectParking';
@@ -105,6 +105,28 @@ function App() {
     },
   ];
 
+  const [isAndroid, setIsAndroid] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    const { userAgent } = window.navigator;
+
+    // Check if user agent contains "Android"
+    if (userAgent.match(/Android/i)) {
+      setIsAndroid(true);
+    }
+
+    // Check if user agent contains "iPhone", "iPad", or "iPod"
+    if (userAgent.match(/iPhone|iPad|iPod/i)) {
+      setIsIOS(true);
+    }
+
+    // Additional check for macOS
+    if (userAgent.match(/Macintosh|MacIntel|Mac OS X/i)) {
+      setIsIOS(true); // Assuming macOS is equivalent to iOS for your purpose
+    }
+  }, []);
+
   return (
     <div className="row">
       <div className="tab-sm-100 col-md-12 steps-area">
@@ -126,6 +148,14 @@ function App() {
             {selectedCar?.plate}
             {' =>'}
             {selectedParking?.number}
+            <div>
+              isIos:
+              {isIOS ? 'true' : 'false'}
+            </div>
+            <div>
+              isAndroid:
+              { isAndroid ? 'true' : 'false'}
+            </div>
             {/* <AddVehicle /> */}
             {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
             {(selectedCar !== null && selectedParking === null) && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}
