@@ -381,6 +381,10 @@ form
     font-size: 18px;
     color: var(--text-color);
     font-weight: 400;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .next-prev .prev
   {
