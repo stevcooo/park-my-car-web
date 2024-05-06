@@ -157,19 +157,15 @@ function App() {
   return (
     <div className="row">
       <div className="tab-sm-100 col-md-12 steps-area">
-        <form id="steps" method="post" encType="multipart/form-data">
-          <div className="show-section wrapper">
-            {/* <AddVehicle /> */}
-            <SelectedComponents car={selectedCar} parking={selectedParking} zone={selectedParkingZone} duration={selectedDurationHours} />
-            {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
-            {(selectedCar !== null && selectedParking === null)
+        {/* <AddVehicle /> */}
+        <SelectedComponents car={selectedCar} parking={selectedParking} zone={selectedParkingZone} duration={selectedDurationHours} />
+        {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
+        {(selectedCar !== null && selectedParking === null)
                           && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}
-            {((selectedParking !== null && selectedParkingZone === null) || selectedParking?.id === GradskiParkingId)
+        {((selectedParking !== null && selectedParkingZone === null) || selectedParking?.id === GradskiParkingId)
                           && <SelectParkingZone itemsToShow={selectedParking.zones} setItem={setSelectedParkingZone} goBack={removeSelectedParking} smsLink={smsLink} canSendSms={selectedParking?.id === GradskiParkingId && selectedParkingZone !== null} />}
-            {(selectedParkingZone !== null && selectedParking?.id === POCId)
+        {(selectedParkingZone !== null && selectedParking?.id === POCId)
               && <SelectDuration itemsToShow={selectedParking.durations} setItem={setSelectedDurationHours} goBack={removeSelectedParkingZone} smsLink={smsLink} canSendSms={selectedDurationHours !== null} />}
-          </div>
-        </form>
       </div>
     </div>
   );

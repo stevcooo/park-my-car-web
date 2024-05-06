@@ -9,7 +9,7 @@ export default function SelectParking({ items, setItem, goBack }) {
 
   return (
     <section className="steps">
-      <div className="lightSpeedIn form" id="step2">
+      <div className="lightSpeedIn">
         <div className="main-heading">
           Паркинг
         </div>

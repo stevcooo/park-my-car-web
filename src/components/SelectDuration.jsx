@@ -25,7 +25,7 @@ export default function SelectDuration({
 
   return (
     <section className="steps">
-      <div className="lightSpeedIn form" id="step2">
+      <div className="lightSpeedIn">
         <div className="main-heading">
           Период
         </div>

@@ -749,3 +749,48 @@ form
     margin-top: 10px;
     z-index: 1;
 }
+
+.bordered {
+    border: solid 1px var(--primary-color) !important;
+    border-radius: 6px;
+    background-color: var(--field-color);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    transition: 0.3s all linear;
+}
+
+.text-to-fit {
+    font-size: 16px; /* Adjust font size as needed */
+    max-width: 100%; /* Ensure text doesn't exceed div width */
+    max-height: 100%; /* Ensure text doesn't exceed div height */
+    text-align: center; /* Center text horizontally */
+    overflow: hidden; /* Hide overflowing text */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.pt-6 {
+    padding-top: 6px;
+}
+
+.pt-18 {
+    padding-top: 18px;
+}
+
+.p-6 {
+    padding: 6px;
+}
+
+.p-18 {
+    padding: 18px;
+}
+
+.px-18 {
+    padding: 0 18px;
+}
+
+.py-18 {
+    padding: 18px 0;
+}

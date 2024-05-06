@@ -50,6 +50,7 @@
 .lightSpeedIn
 {
     animation: lightSpeedIn 0.7s ease-in forwards;
+    margin: 0 24px;
 }
 .lightSpeedOut
 {

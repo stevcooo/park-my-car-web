@@ -3,7 +3,7 @@
 export default function AddVehicle() {
   return (
     <section className="steps">
-      <div className="lightSpeedIn form">
+      <div className="lightSpeedIn">
         <div className="main-heading">
           Додади возило
         </div>
