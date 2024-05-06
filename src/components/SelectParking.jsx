@@ -8,25 +8,27 @@ export default function SelectParking({ items, setItem, goBack }) {
   };
 
   return (
-    <section className="steps">
+    <>
       <div className="lightSpeedIn">
-        <div className="main-heading">
-          Паркинг
-        </div>
-        <div className="check-field row">
-          {items.map((item) => (
-            <div className="col-6" key={item.id}>
-              <div className="check-field-single">
-                {item.logo && (<img src={item.logo} alt="" className="fit-image" />)}
-                <input type="radio" value={item.name} onClick={() => chooseThis(item)} />
+        <div className="content">
+          <div className="main-heading">
+            Паркинг
+          </div>
+          <div className="check-field row">
+            {items.map((item) => (
+              <div className="col-6" key={item.id}>
+                <div className="check-field-single">
+                  {item.logo && (<img src={item.logo} alt="" className="fit-image" />)}
+                  <input type="radio" value={item.name} onClick={() => chooseThis(item)} />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-      <div className="next-prev">
+      <div className="next-prev bottom">
         <button type="button" className="prev" onClick={goBack}>Назад</button>
       </div>
-    </section>
+    </>
   );
 }

@@ -113,6 +113,7 @@ body
 {
     position: relative;
     height: 100vh;
+    overflow: hidden;
 }
 
 
@@ -376,6 +377,7 @@ form
     bottom: 0;
     left: 0;
     display: flex;
+    background: white;
 }
 .next-prev .step1
 {
@@ -800,4 +802,18 @@ form
 
 .py-18 {
     padding: 18px 0;
+}
+
+.header {
+    height: 15vh;
+}
+
+.content {
+    height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.bottom {
+    height: 10vh;
 }

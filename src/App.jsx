@@ -24,6 +24,7 @@ function App() {
   };
   const removeSelectedParking = () => {
     setSelectedParking(null);
+    setSelectedParkingZone(null);
   };
   const removeSelectedParkingZone = () => {
     setSelectedParkingZone(null);
@@ -155,10 +156,12 @@ function App() {
   }, []);
 
   return (
-    <div className="row">
-      <div className="tab-sm-100 col-md-12 steps-area">
-        {/* <AddVehicle /> */}
+    <div className="steps-area">
+      {/* <AddVehicle /> */}
+      <div className="header">
         <SelectedComponents car={selectedCar} parking={selectedParking} zone={selectedParkingZone} duration={selectedDurationHours} />
+      </div>
+      <div className="content">
         {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
         {(selectedCar !== null && selectedParking === null)
                           && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}

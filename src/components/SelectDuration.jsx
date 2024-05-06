@@ -24,26 +24,28 @@ export default function SelectDuration({
   };
 
   return (
-    <section className="steps">
+    <>
       <div className="lightSpeedIn">
-        <div className="main-heading">
-          Период
-        </div>
-        <div className="check-field row">
-          {items.map((item) => (
-            <div className="col-6 mb-4" key={item.id ?? item.code ?? item.name}>
-              <div className="check-field-single">
-                <span className="item-name">{item.name}</span>
-                <input type="radio" className={inputClass(item)} value={item.name} onClick={() => chooseThis(item)} />
+        <div className="content">
+          <div className="main-heading">
+            Период
+          </div>
+          <div className="check-field row">
+            {items.map((item) => (
+              <div className="col-6 mb-4" key={item.id ?? item.code ?? item.name}>
+                <div className="check-field-single">
+                  <span className="item-name">{item.name}</span>
+                  <input type="radio" className={inputClass(item)} value={item.name} onClick={() => chooseThis(item)} />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-      <div className="next-prev">
+      <div className="next-prev bottom">
         <button type="button" className="prev" onClick={goBack}>Назад</button>
         {canSendSms && (<a href={smsLink()} className="next btn">SMS</a>)}
       </div>
-    </section>
+    </>
   );
 }

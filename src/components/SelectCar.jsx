@@ -20,12 +20,12 @@ export default function SelectCar({ setItem }) {
     },
   ];
   return (
-    <section className="steps">
-      <div className="lightSpeedIn">
+    <div className="lightSpeedIn">
+      <div className="content">
         <div className="main-heading">
           Возило
         </div>
-        <div className="check-field row">
+        <div className="check-field row ">
           {vehicles.map((vehicle) => (
             <div className="col-6 mb-4" key={vehicle.id}>
               <div className="check-field-single">
@@ -37,6 +37,6 @@ export default function SelectCar({ setItem }) {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
