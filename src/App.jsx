@@ -10,6 +10,7 @@ import SelectCar from './components/SelectCar';
 import SelectParking from './components/SelectParking';
 import SelectParkingZone from './components/SelectParkingZone';
 import SelectDuration from './components/SelectDuration';
+import SelectedComponents from './components/SelectedComponents';
 
 function App() {
   const [selectedCar, setSelectedCar] = useState(null);
@@ -26,6 +27,7 @@ function App() {
   };
   const removeSelectedParkingZone = () => {
     setSelectedParkingZone(null);
+    setSelectedDurationHours(null);
   };
 
   const reset = () => {
@@ -43,6 +45,7 @@ function App() {
   const parkingTypes = [
     {
       id: POCId,
+      logo: './poclogoto.png',
       number: '141414',
       name: 'Паркинзи на општина Центар',
       zones: [
@@ -61,6 +64,7 @@ function App() {
     },
     {
       id: GradskiParkingId,
+      logo: './gradskiParking.jpeg',
       number: '144144',
       name: 'Паркинзи на Град Скопје',
       zones: [
@@ -126,22 +130,9 @@ function App() {
     }
     const divider = isIOS ? '&' : '?';
     const afterBodySign = isIOS ? '=' : ':';
-    const text = `${selectedParkingZone.code} ${selectedCar.plate} ${selectedDurationHours?.code}`;
+    const text = `${selectedParkingZone.code} ${selectedCar.plate} ${selectedDurationHours?.code ?? ''}`;
     const sms = `sms:${selectedParking.number}${divider}body${afterBodySign}${text.trim()}`;
     return sms;
-  };
-
-  const canSendSms = () => {
-    if (selectedCar === null || selectedParking === null || selectedParkingZone === null) {
-      console.log('false');
-      return false;
-    }
-    if (selectedParking.id === POCId) {
-      console.log(selectedDurationHours !== null ? 'true' : 'false');
-      return selectedDurationHours !== null;
-    }
-    console.log('true');
-    return true;
   };
 
   useEffect(() => {
@@ -168,42 +159,15 @@ function App() {
       <div className="tab-sm-100 col-md-12 steps-area">
         <form id="steps" method="post" encType="multipart/form-data">
           <div className="show-section wrapper">
-            <button type="button" className="prev" onClick={() => reset()}>Ресет</button>
-            {selectedCar?.name}
-            {' '}
-            <br />
-            {selectedParking?.name}
-            {' '}
-            {selectedParking?.number}
-            {' '}
-            <br />
-            {selectedParkingZone?.code}
-            <br />
-            SMS:
-            {' '}
-            {selectedParkingZone?.code}
-            {' '}
-            {selectedCar?.plate}
-            {' =>'}
-            {selectedParking?.number}
-            <div>
-              isIos:
-              {isIOS ? 'true' : 'false'}
-            </div>
-            <div>
-              isAndroid:
-              { isAndroid ? 'true' : 'false'}
-            </div>
-            <br />
-            <a href={smsLink()} className="next">SMS</a>
             {/* <AddVehicle /> */}
+            <SelectedComponents car={selectedCar} parking={selectedParking} zone={selectedParkingZone} duration={selectedDurationHours} />
             {selectedCar === null && <SelectCar setItem={setSelectedCar} />}
             {(selectedCar !== null && selectedParking === null)
                           && <SelectParking items={parkingTypes} setItem={setSelectedParking} goBack={removeSelectedCar} />}
-            {(selectedParking !== null && selectedParkingZone === null)
-                          && <SelectParkingZone itemsToShow={selectedParking.zones} setItem={setSelectedParkingZone} goBack={removeSelectedParking} smsLink={smsLink} canSendSms={() => canSendSms} />}
-            {(selectedParkingZone !== null && selectedParking.id === POCId)
-                          && <SelectDuration itemsToShow={selectedParking.durations} setItem={setSelectedDurationHours} goBack={removeSelectedParkingZone} smsLink={smsLink} />}
+            {((selectedParking !== null && selectedParkingZone === null) || selectedParking?.id === GradskiParkingId)
+                          && <SelectParkingZone itemsToShow={selectedParking.zones} setItem={setSelectedParkingZone} goBack={removeSelectedParking} smsLink={smsLink} canSendSms={selectedParking?.id === GradskiParkingId && selectedParkingZone !== null} />}
+            {(selectedParkingZone !== null && selectedParking?.id === POCId)
+              && <SelectDuration itemsToShow={selectedParking.durations} setItem={setSelectedDurationHours} goBack={removeSelectedParkingZone} smsLink={smsLink} canSendSms={selectedDurationHours !== null} />}
           </div>
         </form>
       </div>

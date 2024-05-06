@@ -1,12 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function SelectParking({ items, setItem, goBack }) {
-  const [, setSelectedItem] = useState(null);
-
   const chooseThis = (item) => {
-    setSelectedItem(item);
     setItem(item);
   };
 
@@ -14,22 +11,21 @@ export default function SelectParking({ items, setItem, goBack }) {
     <section className="steps">
       <div className="lightSpeedIn form" id="step2">
         <div className="main-heading">
-          Изберете паркинг
+          Паркинг
         </div>
         <div className="check-field row">
           {items.map((item) => (
-            <div className="tab-33 col-md-3" key={item.id}>
+            <div className="col-6" key={item.id}>
               <div className="check-field-single">
-                <img src="assets/images/insurance_types/hand.png" alt="" />
-                <input type="radio" name="insurance" value={item.name} onClick={() => chooseThis(item)} />
+                {item.logo && (<img src={item.logo} alt="" className="fit-image" />)}
+                <input type="radio" value={item.name} onClick={() => chooseThis(item)} />
               </div>
-              <span className="insurance-type">{item.name}</span>
             </div>
           ))}
         </div>
       </div>
       <div className="next-prev">
-        <button type="button" className="prev" onClick={goBack}>Previous Step</button>
+        <button type="button" className="prev" onClick={goBack}>Назад</button>
       </div>
     </section>
   );

@@ -19,24 +19,21 @@ export default function SelectParkingZone({
     <section className="steps">
       <div className="lightSpeedIn form" id="step2">
         <div className="main-heading">
-          Изберете зона
-          {' '}
-          {canSendSms && 'и пратете SMS'}
+          Зона
         </div>
         <div className="check-field row">
           {items.map((item) => (
-            <div className="tab-33 col-md-3" key={item.id ?? item.code ?? item.name}>
+            <div className="col-6 mb-4" key={item.id ?? item.code ?? item.name}>
               <div className="check-field-single">
-                <img src="assets/images/insurance_types/hand.png" alt="" />
-                <input type="radio" name="insurance" value={item.name ?? item.code} onClick={() => chooseThis(item)} />
+                <span className="item-name">{item.code ?? item.name}</span>
+                <input type="radio" value={item.name ?? item.code} onClick={() => chooseThis(item)} />
               </div>
-              <span className="insurance-type">{item.name ?? item.code}</span>
             </div>
           ))}
         </div>
       </div>
       <div className="next-prev">
-        <button type="button" className="prev" onClick={goBack}>Previous Step</button>
+        <button type="button" className="prev" onClick={goBack}>Назад</button>
         {canSendSms && (<a href={smsLink()} className="next btn">SMS</a>)}
       </div>
     </section>

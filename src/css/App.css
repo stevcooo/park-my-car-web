@@ -422,6 +422,7 @@ form
     position: relative;
     display: grid;
     place-content: center;
+    text-align: center;
 }
 .check-field-single img
 {
@@ -442,15 +443,11 @@ form
     border: solid 2px transparent;
     cursor: pointer;
     transition: 0.3s all linear;
+}
 
-}
-.check-field-single input[type=radio]:checked
-{
-    border-color: var(--primary-color);
-    box-shadow: 0px 3px 35px 0px rgba(0, 0, 0, 0.07);
-}
-.check-field-single input[type=radio]:checked::before
-{  
+
+.checked-item {
+    border: solid 2px var(--primary-color) !important;
     content: "\f00c";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -458,14 +455,14 @@ form
     text-align: center;
     line-height: 25px;
     color: var(--text-color);
-    background-color: var(--primary-color);
+    background-color: var(--primary-color) !important;
+    opacity: 0.7;
     width: 25px;
     height: 25px;
     border-radius: 50%;
     position: absolute;
     top: 8px;
     left: 8px;
-      
 }
   
 .check-field .insurance-type
@@ -737,4 +734,18 @@ form
 {
   border: solid 2px #ff4444 !important;
   position: relative;
+}
+
+.fit-image {
+    width: 100%; /* Make the image width 100% of parent width */
+    height: 100%; /* Make the image height 100% of parent height */
+    object-fit: cover; /* Optional: Maintain aspect ratio and cover entire area */
+}
+
+.item-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--field-text-color);
+    margin-top: 10px;
+    z-index: 1;
 }
