@@ -1,10 +1,12 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 
-export default function SelectDuration({
-  itemsToShow, setItem, goBack, smsLink, canSendSms,
-}) {
+export default function SelectDuration({ itemsToShow, setItem, goBack, smsLink, canSendSms }) {
   const [items, setItems] = useState(itemsToShow);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -27,15 +29,16 @@ export default function SelectDuration({
     <>
       <div className="lightSpeedIn">
         <div className="content">
-          <div className="main-heading">
-            Период
-          </div>
+          <div className="main-heading">Период</div>
           <div className="check-field row">
             {items.map((item) => (
-              <div className="col-6 mb-4" key={item.id ?? item.code ?? item.name}>
+              <div
+                className="col-6 mb-4"
+                key={item.id ?? item.code ?? item.name}
+                onClick={() => chooseThis(item)}>
                 <div className="check-field-single">
                   <span className="item-name">{item.name}</span>
-                  <input type="radio" className={inputClass(item)} value={item.name} onClick={() => chooseThis(item)} />
+                  <input type="radio" className={inputClass(item)} value={item.name} />
                 </div>
               </div>
             ))}
@@ -43,8 +46,14 @@ export default function SelectDuration({
         </div>
       </div>
       <div className="next-prev bottom">
-        <button type="button" className="prev" onClick={goBack}>Назад</button>
-        {canSendSms && (<a href={smsLink()} className="next btn">SMS</a>)}
+        <button type="button" className="prev" onClick={goBack}>
+          Назад
+        </button>
+        {canSendSms && (
+          <a href={smsLink()} className="next btn">
+            SMS
+          </a>
+        )}
       </div>
     </>
   );

@@ -1,10 +1,12 @@
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable object-curly-newline */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 
-export default function SelectParkingZone({
-  itemsToShow, setItem, goBack, smsLink, canSendSms,
-}) {
+export default function SelectParkingZone({ itemsToShow, setItem, goBack, smsLink, canSendSms }) {
   const [items, setItems] = useState(itemsToShow);
 
   const chooseThis = (item) => {
@@ -19,15 +21,16 @@ export default function SelectParkingZone({
     <>
       <div className="lightSpeedIn">
         <div className="content">
-          <div className="main-heading">
-            Зона
-          </div>
+          <div className="main-heading">Зона</div>
           <div className="check-field row">
             {items.map((item) => (
-              <div className="col-6 mb-4" key={item.id ?? item.code ?? item.name}>
+              <div
+                className="col-6 mb-4"
+                key={item.id ?? item.code ?? item.name}
+                onClick={() => chooseThis(item)}>
                 <div className="check-field-single">
                   <span className="item-name">{item.code ?? item.name}</span>
-                  <input type="radio" value={item.name ?? item.code} onClick={() => chooseThis(item)} />
+                  <input type="radio" value={item.name ?? item.code} />
                 </div>
               </div>
             ))}
@@ -35,8 +38,14 @@ export default function SelectParkingZone({
         </div>
       </div>
       <div className="next-prev bottom">
-        <button type="button" className="prev" onClick={goBack}>Назад</button>
-        {canSendSms && (<a href={smsLink()} className="next btn">SMS</a>)}
+        <button type="button" className="prev" onClick={goBack}>
+          Назад
+        </button>
+        {canSendSms && (
+          <a href={smsLink()} className="next btn">
+            SMS
+          </a>
+        )}
       </div>
     </>
   );
