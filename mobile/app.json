@@ -9,7 +9,6 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.stevan.parkmycar",
-      "buildNumber": "1",
       "config": {
         "usesNonExemptEncryption": false
       }
