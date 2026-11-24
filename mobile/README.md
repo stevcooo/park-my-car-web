@@ -147,12 +147,14 @@ prints a link to follow it. Nothing is downloaded to the Mac.
 npx eas-cli@latest submit --platform ios
 ```
 
-Picks the latest build, creates the App Store Connect app record if there is
-none yet, and uploads. Apple processes it for about 5 to 10 minutes and emails
-when done. First time only, in App Store Connect > the app > TestFlight: add an
-internal testing group with your own Apple ID in it, then install TestFlight
-on the phone and accept the invite. Later builds reach that group on their
-own.
+Picks the latest build and uploads it. Apple processes it for about 5 to 10
+minutes and emails when done. The first submit (2026-11-24) created the App
+Store Connect record (ASC app id 6838751909, team CVR6Y3WQNL, both now in the
+`submit.production.ios` profile), an App Store Connect API key stored on EAS,
+and a TestFlight internal group "Team (Expo)" with stevcooo@gmail.com in it.
+Install TestFlight on the phone, accept the invite, and later builds reach
+that group on their own. The App Store Connect name is "Park My Car (16b04a)"
+because "Park My Car" was taken; it only matters for a store listing.
 
 `npx eas-cli@latest build --platform ios --profile production --auto-submit`
 does both steps in one go.
