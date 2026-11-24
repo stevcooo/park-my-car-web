@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Receiving ACL_CONNECTED and listing paired devices. -->
+  <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+  <application>
+    <!--
+      ACL_CONNECTED is on Android's implicit-broadcast exemption list, so this
+      manifest receiver runs even when the app process is not alive. It is a
+      protected broadcast: only the system can send it.
+    -->
+    <receiver
+      android:name=".CarConnectedReceiver"
+      android:enabled="true"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+      </intent-filter>
+    </receiver>
+  </application>
+</manifest>
