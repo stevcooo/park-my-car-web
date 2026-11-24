@@ -107,6 +107,67 @@ The Kotlin in `modules/car-bluetooth/` has not been compiled yet: the machine
 it was written on had no Android SDK. The first `npx expo run:android` is the
 real check.
 
+## TestFlight
+
+Builds are made in the cloud with EAS and uploaded to App Store Connect.
+`eas.json` has a `production` profile (store build, build number
+auto-incremented on the EAS side, `cli.appVersionSource` is `remote`) and a
+`development` profile (dev client for the simulator). `app.json` carries the
+bundle id `com.stevan.parkmycar` and `usesNonExemptEncryption: false`, so
+TestFlight does not stop on the export-compliance question.
+
+You need, one time only:
+
+- An Expo account (free): `npx eas-cli@latest login`.
+- A paid Apple Developer Program membership on the Apple ID you will use.
+  TestFlight needs it; a free Apple ID can only sideload with Xcode.
+- Native builds run in the cloud, but the EAS CLI runs here. If a step
+  shells out to CocoaPods, set the locale first:
+  `export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8`.
+
+Then, from `mobile/`:
+
+```bash
+npx eas-cli@latest init
+```
+
+Links the folder to an EAS project and writes `extra.eas.projectId` into
+`app.json` (commit that). Only needed the first time.
+
+```bash
+npx eas-cli@latest build --platform ios --profile production
+```
+
+The first run signs in to Apple, registers the bundle id, and creates the
+distribution certificate and provisioning profile on Expo's servers (say yes
+when it offers to generate them). The build takes 10 to 20 minutes; the CLI
+prints a link to follow it. Nothing is downloaded to the Mac.
+
+```bash
+npx eas-cli@latest submit --platform ios
+```
+
+Picks the latest build, creates the App Store Connect app record if there is
+none yet, and uploads. Apple processes it for about 5 to 10 minutes and emails
+when done. First time only, in App Store Connect > the app > TestFlight: add an
+internal testing group with your own Apple ID in it, then install TestFlight
+on the phone and accept the invite. Later builds reach that group on their
+own.
+
+`npx eas-cli@latest build --platform ios --profile production --auto-submit`
+does both steps in one go.
+
+Related:
+
+- `npx eas-cli@latest build:version:sync` copies the remote build number into
+  `app.json` when a local Xcode build needs to match.
+- `npx eas-cli@latest build --platform ios --profile development` makes a
+  simulator dev client without a local Xcode build.
+- If Apple emails about missing privacy-manifest reasons after an upload, add
+  `ios.privacyManifests` to `app.json` (see
+  https://docs.expo.dev/guides/apple-privacy.md). Today every installed package
+  that touches a required-reason API ships its own `PrivacyInfo.xcprivacy`.
+
 ## Layout
 
 ```
@@ -134,4 +195,4 @@ modules/car-bluetooth/       local Expo module: ACL_CONNECTED receiver (Android)
 - CarPlay (needs Apple's parking entitlement) and Android Auto via
   `react-native-carplay`.
 - Editing a vehicle in place (today: remove and re-add).
-- Signing, TestFlight and sideload builds (EAS or local).
+- Android builds for sideloading or Play internal testing (EAS or local).
